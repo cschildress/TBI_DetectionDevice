@@ -8,12 +8,12 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+from Questionnaire import Ui_Questionnaire
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(800, 600)
+        MainWindow.resize(784, 483)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.beginButton = QtWidgets.QPushButton(self.centralwidget)
@@ -36,7 +36,6 @@ class Ui_MainWindow(object):
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
-
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
@@ -49,7 +48,11 @@ class Ui_MainWindow(object):
         self.title.setText(_translate("MainWindow", "Welcome to the TBI Assessment Tool"))
 
     def launchQuestionnaire(self):
-        print("Questionnaire selected")
+        self.window = QtWidgets.QMainWindow()
+        self.ui = Ui_Questionnaire()
+        self.ui.setupUi(self.window)
+        MainWindow.hide()
+        self.window.show()
 
 if __name__ == "__main__":
     import sys
