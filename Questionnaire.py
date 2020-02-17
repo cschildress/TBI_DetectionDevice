@@ -37,18 +37,21 @@ class Ui_Questionnaire(object):
         self.radioButton_0.setFont(font)
         self.radioButton_0.setObjectName("radioButton_0")
         self.verticalLayout.addWidget(self.radioButton_0)
+        self.radioButton_0.clicked.connect(self.getAnswers)
         self.radioButton_1 = QtWidgets.QRadioButton(self.verticalLayoutWidget)
         font = QtGui.QFont()
         font.setPointSize(12)
         self.radioButton_1.setFont(font)
         self.radioButton_1.setObjectName("radioButton_1")
         self.verticalLayout.addWidget(self.radioButton_1)
+        self.radioButton_1.clicked.connect(self.getAnswers)
         self.radioButton_2 = QtWidgets.QRadioButton(self.verticalLayoutWidget)
         font = QtGui.QFont()
         font.setPointSize(12)
         self.radioButton_2.setFont(font)
         self.radioButton_2.setObjectName("radioButton_2")
         self.verticalLayout.addWidget(self.radioButton_2)
+        self.radioButton_2.clicked.connect(self.getAnswers)
         self.radioButton_3 = QtWidgets.QRadioButton(self.verticalLayoutWidget)
         self.radioButton_3.setEnabled(True)
         font = QtGui.QFont()
@@ -56,6 +59,7 @@ class Ui_Questionnaire(object):
         self.radioButton_3.setFont(font)
         self.radioButton_3.setObjectName("radioButton_3")
         self.verticalLayout.addWidget(self.radioButton_3)
+        self.radioButton_3.clicked.connect(self.getAnswers)
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton.setGeometry(QtCore.QRect(340, 410, 91, 31))
         font = QtGui.QFont()
@@ -85,9 +89,7 @@ class Ui_Questionnaire(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-        #self.radioButton_0.clicked.connect(self.getAnswers)
 
-        self.getAnswers()
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -109,10 +111,14 @@ class Ui_Questionnaire(object):
         self.instructions_1.setText(_translate("MainWindow", "The following questions are to be answered by the patient to the best of their ability"))
 
     def getAnswers(self):
-        print("hello")
         if self.radioButton_0.isChecked():
-            print(self.radioButton_0.text() + "is selected")
-
+            print(self.radioButton_0.text() + " is selected")
+        elif self.radioButton_1.isChecked():
+            print(self.radioButton_1.text() + " is selected")
+        elif self.radioButton_2.isChecked():
+            print(self.radioButton_2.text() + " is selected")
+        elif self.radioButton_3.isChecked():
+            print(self.radioButton_3.text() + " is selected")
 
 if __name__ == "__main__":
     import sys
