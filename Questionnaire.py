@@ -9,11 +9,22 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-
 class Ui_Questionnaire(object):
+
+    questionCount = 0
+    questions = ["Have you felt seriously nauseous or vomited after the incident?",
+                 "Do you feel week, drowsy, or tired right now?",
+                 "Are your ears ringing?",
+                 "Have you had increased sensitivity  to light and noise since the incident",
+                 "How disoriented does the subject look?",
+                 "How slurred is the subject speech?",
+                 "How well has the subject been responding to instructions?",
+                 "Are the subject's eyes unfocused?",
+                 "Did the subject have a delayed response to the questions?"]
+
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(784, 483)
+        MainWindow.resize(800, 480)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.title = QtWidgets.QLabel(self.centralwidget)
@@ -25,43 +36,39 @@ class Ui_Questionnaire(object):
         self.textBrowser_2 = QtWidgets.QTextBrowser(self.centralwidget)
         self.textBrowser_2.setGeometry(QtCore.QRect(190, 142, 399, 121))
         self.textBrowser_2.setObjectName("textBrowser_2")
-        self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.verticalLayoutWidget.setGeometry(QtCore.QRect(370, 280, 41, 112))
-        self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
-        self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
-        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
-        self.verticalLayout.setObjectName("verticalLayout")
-        self.radioButton_0 = QtWidgets.QRadioButton(self.verticalLayoutWidget)
+        self.horizontalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
+        self.horizontalLayoutWidget.setGeometry(QtCore.QRect(260, 260, 291, 80))
+        self.horizontalLayoutWidget.setObjectName("horizontalLayoutWidget")
+        self.horizontalLayout = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget)
+        self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout.setObjectName("horizontalLayout")
+        self.radioButton_0 = QtWidgets.QRadioButton(self.horizontalLayoutWidget)
         font = QtGui.QFont()
         font.setPointSize(12)
         self.radioButton_0.setFont(font)
         self.radioButton_0.setObjectName("radioButton_0")
-        self.verticalLayout.addWidget(self.radioButton_0)
-        self.radioButton_0.clicked.connect(self.getAnswers)
-        self.radioButton_1 = QtWidgets.QRadioButton(self.verticalLayoutWidget)
+        self.horizontalLayout.addWidget(self.radioButton_0)
+        self.radioButton_1 = QtWidgets.QRadioButton(self.horizontalLayoutWidget)
         font = QtGui.QFont()
         font.setPointSize(12)
         self.radioButton_1.setFont(font)
         self.radioButton_1.setObjectName("radioButton_1")
-        self.verticalLayout.addWidget(self.radioButton_1)
-        self.radioButton_1.clicked.connect(self.getAnswers)
-        self.radioButton_2 = QtWidgets.QRadioButton(self.verticalLayoutWidget)
+        self.horizontalLayout.addWidget(self.radioButton_1)
+        self.radioButton_2 = QtWidgets.QRadioButton(self.horizontalLayoutWidget)
         font = QtGui.QFont()
         font.setPointSize(12)
         self.radioButton_2.setFont(font)
         self.radioButton_2.setObjectName("radioButton_2")
-        self.verticalLayout.addWidget(self.radioButton_2)
-        self.radioButton_2.clicked.connect(self.getAnswers)
-        self.radioButton_3 = QtWidgets.QRadioButton(self.verticalLayoutWidget)
+        self.horizontalLayout.addWidget(self.radioButton_2)
+        self.radioButton_3 = QtWidgets.QRadioButton(self.horizontalLayoutWidget)
         self.radioButton_3.setEnabled(True)
         font = QtGui.QFont()
         font.setPointSize(12)
         self.radioButton_3.setFont(font)
         self.radioButton_3.setObjectName("radioButton_3")
-        self.verticalLayout.addWidget(self.radioButton_3)
-        self.radioButton_3.clicked.connect(self.getAnswers)
+        self.horizontalLayout.addWidget(self.radioButton_3)
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton.setGeometry(QtCore.QRect(340, 410, 91, 31))
+        self.pushButton.setGeometry(QtCore.QRect(360, 380, 91, 31))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.pushButton.setFont(font)
@@ -73,14 +80,14 @@ class Ui_Questionnaire(object):
         self.instructions_2.setFont(font)
         self.instructions_2.setObjectName("instructions_2")
         self.instructions_1 = QtWidgets.QLabel(self.centralwidget)
-        self.instructions_1.setGeometry(QtCore.QRect(190, 60, 411, 31))
+        self.instructions_1.setGeometry(QtCore.QRect(190, 60, 411, 41))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.instructions_1.setFont(font)
         self.instructions_1.setObjectName("instructions_1")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 784, 21))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 784, 25))
         self.menubar.setObjectName("menubar")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
@@ -89,7 +96,18 @@ class Ui_Questionnaire(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
+        self.group = QtWidgets.QButtonGroup()
+        self.group.addButton(self.radioButton_0)
+        self.group.addButton(self.radioButton_1)
+        self.group.addButton(self.radioButton_2)
+        self.group.addButton(self.radioButton_3)
 
+
+        self.radioButton_0.clicked.connect(self.getAnswers)
+        self.radioButton_1.clicked.connect(self.getAnswers)
+        self.radioButton_2.clicked.connect(self.getAnswers)
+        self.radioButton_3.clicked.connect(self.getAnswers)
+        self.pushButton.clicked.connect(self.buildQuestion)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -108,7 +126,7 @@ class Ui_Questionnaire(object):
         self.radioButton_3.setText(_translate("MainWindow", "3"))
         self.pushButton.setText(_translate("MainWindow", "Next ->"))
         self.instructions_2.setText(_translate("MainWindow", "0 being the least, 3 being the most."))
-        self.instructions_1.setText(_translate("MainWindow", "The following questions are to be answered by the patient to the best of their ability"))
+        self.instructions_1.setText(_translate("MainWindow", "The following questions are to be answered by the patient \n                      to the best of their ability."))
 
     def getAnswers(self):
         if self.radioButton_0.isChecked():
@@ -119,6 +137,30 @@ class Ui_Questionnaire(object):
             print(self.radioButton_2.text() + " is selected")
         elif self.radioButton_3.isChecked():
             print(self.radioButton_3.text() + " is selected")
+
+    def buildQuestion(self):
+        self.questionCount += 1
+        print(self.questionCount)
+        self.textBrowser_2.clear()
+        _translate = QtCore.QCoreApplication.translate
+        self.textBrowser_2.setHtml(_translate("MainWindow",
+                                              "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+                                              "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+                                              "p, li { white-space: pre-wrap; }\n"
+                                              "</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
+                                              "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'MS Shell Dlg 2\'; font-size:12pt; font-weight:600;\">Question " + str(self.questionCount + 1) + ": </span></p>\n"
+                                              "<p align=\"center\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'MS Shell Dlg 2\'; font-size:12pt; font-weight:600;\"><br /></p>\n"
+                                              "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'MS Shell Dlg 2\'; font-size:12pt; font-weight:600;\">" + self.questions[self.questionCount - 1] + "</span></p></body></html>"))
+        self.group.setExclusive(False)
+        self.radioButton_0.setChecked(False)
+        self.radioButton_1.setChecked(False)
+        self.radioButton_2.setChecked(False)
+        self.radioButton_3.setChecked(False)
+        self.group.setExclusive(True)
+
+        if self.questionCount == 5:
+            self.instructions_1.clear()
+            self.instructions_1.setText(_translate("MainWindow", "The following questions are to be answered by the examiner."))
 
 if __name__ == "__main__":
     import sys
