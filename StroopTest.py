@@ -8,6 +8,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from StroopPictures import Ui_StroopPictures
 
 
 class Ui_StroopTest(object):
@@ -19,6 +20,7 @@ class Ui_StroopTest(object):
         self.verticalLayout = QtWidgets.QVBoxLayout(self.centralwidget)
         self.verticalLayout.setObjectName("verticalLayout")
         self.title = QtWidgets.QLabel(self.centralwidget)
+        self.title.setGeometry(QtCore.QRect(13, 10, 55, 41))
         font = QtGui.QFont()
         font.setPointSize(20)
         self.title.setFont(font)
@@ -30,7 +32,7 @@ class Ui_StroopTest(object):
         self.verticalLayout.addWidget(self.textBrowser_2)
         self.examplePicture = QtWidgets.QLabel(self.centralwidget)
         self.examplePicture.setText("")
-        self.examplePicture.setPixmap(QtGui.QPixmap("exmapleStroop.JPG"))
+        self.examplePicture.setPixmap(QtGui.QPixmap("/home/pi/exmapleStroop.JPG"))
         self.examplePicture.setScaledContents(True)
         self.examplePicture.setObjectName("examplePicture")
         self.verticalLayout.addWidget(self.examplePicture)
@@ -50,9 +52,10 @@ class Ui_StroopTest(object):
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
-
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
+
+        self.pushButton.clicked.connect(self.launchStroopPictures)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -68,6 +71,11 @@ class Ui_StroopTest(object):
 "<p align=\"center\" style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
         self.pushButton.setText(_translate("MainWindow", "Start"))
 
+    def launchStroopPictures(self):
+        self.window = QtWidgets.QMainWindow()
+        self.ui = Ui_StroopPictures()
+        self.ui.setupUi(self.window)
+        self.window.show()
 
 if __name__ == "__main__":
     import sys
