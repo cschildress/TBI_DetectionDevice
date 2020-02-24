@@ -23,7 +23,7 @@ class Ui_MainWindow(object):
         self.beginButton.setFont(font)
         self.beginButton.setObjectName("beginButton")
         self.title = QtWidgets.QLabel(self.centralwidget)
-        self.title.setGeometry(QtCore.QRect(170, 100, 451, 41))
+        self.title.setGeometry(QtCore.QRect(135, 100, 551, 41))
         font = QtGui.QFont()
         font.setPointSize(20)
         self.title.setFont(font)
