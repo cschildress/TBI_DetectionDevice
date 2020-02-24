@@ -8,6 +8,8 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from StroopTest import Ui_StroopTest
+
 
 class Ui_Questionnaire(object):
 
@@ -117,6 +119,8 @@ class Ui_Questionnaire(object):
         self.group.addButton(self.radioButton_3)
         self.group.addButton(self.radioButton_4)
 
+
+
         self.pushButton.clicked.connect(self.buildQuestion)
         if self.questionCount == 10:
             print(self.sum)
@@ -168,6 +172,7 @@ class Ui_Questionnaire(object):
             self.radioButton_1.setChecked(False)
             self.radioButton_2.setChecked(False)
             self.radioButton_3.setChecked(False)
+            self.radioButton_4.setChecked(False)
             self.group.setExclusive(True)
         else:
             if self.radioButton_0.isChecked():
@@ -180,6 +185,7 @@ class Ui_Questionnaire(object):
                 self.sum += 3
             elif self.radioButton_4.isChecked():
                 self.sum += 4
+
             self.pushButton.clicked.connect(self.launchStroop)
 
     def launchStroop(self):
