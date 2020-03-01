@@ -20,7 +20,7 @@ class Ui_StroopPictures(object):
     quad4 = [None] * 10
 
     for x in range(1,11):
-        quad1[x - 1] = "/Users/CABOOMDUDE23/Downloads/PythonStuff/T" + str(x) + "S1" + ".jpg"
+        quad1[x - 1] = "/Users/CABOOMDUDE23/Downloads/PythonStuff//T" + str(x) + "S1" + ".jpg"
         quad2[x - 1] = "/Users/CABOOMDUDE23/Downloads/PythonStuff//T" + str(x) + "S2" + ".jpg"
         quad3[x - 1] = "/Users/CABOOMDUDE23/Downloads/PythonStuff//T" + str(x) + "S3" + ".jpg"
         quad4[x - 1] = "/Users/CABOOMDUDE23/Downloads/PythonStuff//T" + str(x) + "S4" + ".jpg"
