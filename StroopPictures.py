@@ -20,10 +20,10 @@ class Ui_StroopPictures(object):
     quad4 = [None] * 10
 
     for x in range(1,11):
-        quad1[x - 1] = "/home/pi/T" + str(x) + "S1" + ".jpg"
-        quad2[x - 1] = "/home/pi/T" + str(x) + "S2" + ".jpg"
-        quad3[x - 1] = "/home/pi/T" + str(x) + "S3" + ".jpg"
-        quad4[x - 1] = "/home/pi/T" + str(x) + "S4" + ".jpg"
+        quad1[x - 1] = "/Users/CABOOMDUDE23/Downloads/PythonStuff/T" + str(x) + "S1" + ".jpg"
+        quad2[x - 1] = "/Users/CABOOMDUDE23/Downloads/PythonStuff//T" + str(x) + "S2" + ".jpg"
+        quad3[x - 1] = "/Users/CABOOMDUDE23/Downloads/PythonStuff//T" + str(x) + "S3" + ".jpg"
+        quad4[x - 1] = "/Users/CABOOMDUDE23/Downloads/PythonStuff//T" + str(x) + "S4" + ".jpg"
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -76,6 +76,11 @@ class Ui_StroopPictures(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
+        self.clickable(self.image1).connect(self.buildStroop)
+        self.clickable(self.image2).connect(self.buildStroop)
+        self.clickable(self.image3).connect(self.buildStroop)
+        self.clickable(self.image4).connect(self.buildStroop)
+
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
@@ -83,7 +88,7 @@ class Ui_StroopPictures(object):
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:26pt; font-weight:600; color:#ff0000;\">ORANGE</span></p></body></html>"))
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:26pt; font-weight:600; color:#4eab5a;\">ORANGE</span></p></body></html>"))
 
     def clickable(widget):
 
@@ -101,17 +106,18 @@ class Ui_StroopPictures(object):
         filter = Filter(widget)
         widget.installEventFilter
         return filter.clicked
+    #
+    # class Window(QWidget):
+    #     print("test")
+    #     def __init__(self, parent=None):
+    #         QWidget.__init__(self, parent)
+    #
+    #
 
-    class Window(QWidget):
-        def __init__(self, parent=None):
-            QWidget.__init__(self, parent)
 
-            self.clickable(self.image1).connect(self.buildStroop)
-            self.clickable(self.image2).connect(self.buildStroop)
-            self.clickable(self.image3).connect(self.buildStroop)
-            self.clickable(self.image4).connect(self.buildStroop)
 
     def buildStroop(self):
+        print("test ")
         self.count += 1
         self.image1.setPixmap(QtGui.QPixmap(self.quad1[self.count]))
         self.image2.setPixmap(QtGui.QPixmap(self.quad2[self.count]))
