@@ -8,10 +8,12 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtCore import QObject, pyqtSignal, QEvent
+from PyQt5.QtWidgets import QWidget, QLabel
 
 
 class Ui_StroopPictures(object):
-
+    count = 0
     quad1 = [None] * 10
     quad2 = [None] * 10
     quad3 = [None] * 10
@@ -82,6 +84,40 @@ class Ui_StroopPictures(object):
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:26pt; font-weight:600; color:#ff0000;\">ORANGE</span></p></body></html>"))
+
+    def clickable(widget):
+
+        class Filter(QObject):
+
+            clicked = pyqtSignal()
+            def eventFilter(self, obj, event):
+                if obj == widget:
+                    if event.type() == QEvent.MouseButtonRelease:
+                        if obj.rect().contains(event.pos()):
+                            self.clicked.emit()
+                            return True
+                return False
+
+        filter = Filter(widget)
+        widget.installEventFilter
+        return filter.clicked
+
+    class Window(QWidget):
+        def __init__(self, parent=None):
+            QWidget.__init__(self, parent)
+
+            self.clickable(self.image1).connect(self.buildStroop)
+            self.clickable(self.image2).connect(self.buildStroop)
+            self.clickable(self.image3).connect(self.buildStroop)
+            self.clickable(self.image4).connect(self.buildStroop)
+
+    def buildStroop(self):
+        self.count += 1
+        self.image1.setPixmap(QtGui.QPixmap(self.quad1[self.count]))
+        self.image2.setPixmap(QtGui.QPixmap(self.quad2[self.count]))
+        self.image3.setPixmap(QtGui.QPixmap(self.quad3[self.count]))
+        self.image4.setPixmap(QtGui.QPixmap(self.quad4[self.count]))
+
 
 
 if __name__ == "__main__":
