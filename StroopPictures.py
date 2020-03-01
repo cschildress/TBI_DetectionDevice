@@ -11,6 +11,18 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_StroopPictures(object):
+
+    quad1 = [None] * 10
+    quad2 = [None] * 10
+    quad3 = [None] * 10
+    quad4 = [None] * 10
+
+    for x in range(1,11):
+        quad1[x - 1] = "/home/pi/T" + str(x) + "S1" + ".jpg"
+        quad2[x - 1] = "/home/pi/T" + str(x) + "S2" + ".jpg"
+        quad3[x - 1] = "/home/pi/T" + str(x) + "S3" + ".jpg"
+        quad4[x - 1] = "/home/pi/T" + str(x) + "S4" + ".jpg"
+
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 480)
@@ -24,25 +36,25 @@ class Ui_StroopPictures(object):
         self.gridLayout.setObjectName("gridLayout")
         self.image1 = QtWidgets.QLabel(self.gridLayoutWidget)
         self.image1.setText("")
-        self.image1.setPixmap(QtGui.QPixmap("/home/pi/T1S1.jpg"))
+        self.image1.setPixmap(QtGui.QPixmap(self.quad1[0]))
         self.image1.setScaledContents(True)
         self.image1.setObjectName("image1")
         self.gridLayout.addWidget(self.image1, 0, 0, 1, 1)
         self.image2 = QtWidgets.QLabel(self.gridLayoutWidget)
         self.image2.setText("")
-        self.image2.setPixmap(QtGui.QPixmap("/home/pi/T1S3.jpg"))
+        self.image2.setPixmap(QtGui.QPixmap(self.quad2[0]))
         self.image2.setScaledContents(True)
         self.image2.setObjectName("image2")
         self.gridLayout.addWidget(self.image2, 1, 0, 1, 1)
         self.label_4 = QtWidgets.QLabel(self.gridLayoutWidget)
         self.label_4.setText("")
-        self.label_4.setPixmap(QtGui.QPixmap("/home/pi/T1S4.jpg"))
+        self.label_4.setPixmap(QtGui.QPixmap(self.quad3[0]))
         self.label_4.setScaledContents(True)
         self.label_4.setObjectName("label_4")
         self.gridLayout.addWidget(self.label_4, 1, 1, 1, 1)
         self.image3 = QtWidgets.QLabel(self.gridLayoutWidget)
         self.image3.setText("")
-        self.image3.setPixmap(QtGui.QPixmap("/home/pi/T1S2.jpg"))
+        self.image3.setPixmap(QtGui.QPixmap(self.quad4[0]))
         self.image3.setScaledContents(True)
         self.image3.setObjectName("image3")
         self.gridLayout.addWidget(self.image3, 0, 1, 1, 1)
