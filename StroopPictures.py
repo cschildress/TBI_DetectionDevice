@@ -152,8 +152,8 @@ class Ui_StroopPictures(object):
             self.incorrect += 1
 
     def buildStroop(self):
-        print(self.correct)
-        print(self.incorrect)
+        print("correct: " + self.correct)
+        print("incorrect: " + self.incorrect)
         print(self.count)
         self.count += 1
         self.pushButton.setIcon(QtGui.QIcon(self.quad1[self.count]))
