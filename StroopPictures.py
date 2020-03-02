@@ -14,6 +14,8 @@ from PyQt5.QtWidgets import QWidget, QLabel
 
 class Ui_StroopPictures(object):
     count = 0
+    correct = 0
+    incorrect = 0
     quad1 = [None] * 10
     quad2 = [None] * 10
     quad3 = [None] * 10
@@ -74,7 +76,7 @@ class Ui_StroopPictures(object):
         self.gridLayout_2.addWidget(self.pushButton_4, 1, 1, 1, 1)
         self.gridLayout.addLayout(self.gridLayout_2, 0, 0, 1, 1)
         self.textBrowser = QtWidgets.QTextBrowser(self.centralwidget)
-        self.textBrowser.setGeometry(QtCore.QRect(310, 0, 171, 51))
+        self.textBrowser.setGeometry(QtCore.QRect(310, 0, 180, 51))
         self.textBrowser.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.textBrowser.setObjectName("textBrowser")
         MainWindow.setCentralWidget(self.centralwidget)
@@ -106,25 +108,53 @@ class Ui_StroopPictures(object):
 
         self.pushButton.setIcon(QtGui.QIcon(self.quad1[0]))
         self.pushButton.setIconSize(QtCore.QSize(300, 180))
+        self.pushButton.clicked.connect(self.check1)
         self.pushButton.clicked.connect(self.buildStroop)
         self.pushButton.setFlat(True)
 
         self.pushButton_2.setIcon(QtGui.QIcon(self.quad2[0]))
         self.pushButton_2.setIconSize(QtCore.QSize(300, 180))
+        self.pushButton_2.clicked.connect(self.check2)
         self.pushButton_2.clicked.connect(self.buildStroop)
         self.pushButton_2.setFlat(True)
 
         self.pushButton_3.setIcon(QtGui.QIcon(self.quad3[0]))
         self.pushButton_3.setIconSize(QtCore.QSize(300, 180))
+        self.pushButton_3.clicked.connect(self.check3)
         self.pushButton_3.clicked.connect(self.buildStroop)
         self.pushButton_3.setFlat(True)
 
         self.pushButton_4.setIcon(QtGui.QIcon(self.quad4[0]))
         self.pushButton_4.setIconSize(QtCore.QSize(300, 180))
+        self.pushButton_4.clicked.connect(self.check4)
         self.pushButton_4.clicked.connect(self.buildStroop)
         self.pushButton_4.setFlat(True)
 
+    def check1(self):
+        if self.count == 3:
+            self.correct += 1
+        else:
+            self.incorrect += 1
+    def check2(self):
+        if self.count == 0 or 7 or 8:
+            self.correct += 1
+        else:
+            self.incorrect += 1
+    def check3(self):
+        if self.count == 1 or 2 or 4 or 9:
+            self.correct += 1
+        else:
+            self.incorrect += 1
+    def check4(self):
+        if self.count == 5 or 6:
+            self.correct += 1
+        else:
+            self.incorrect += 1
+
     def buildStroop(self):
+        print(self.correct)
+        print(self.incorrect)
+        print(self.count)
         self.count += 1
         self.pushButton.setIcon(QtGui.QIcon(self.quad1[self.count]))
         self.pushButton.setIconSize(QtCore.QSize(326, 196))
