@@ -135,16 +135,19 @@ class Ui_StroopPictures(object):
             self.correct += 1
         else:
             self.incorrect += 1
+
     def check2(self):
         if self.count == 0 or 7 or 8:
             self.correct += 1
         else:
             self.incorrect += 1
+
     def check3(self):
         if self.count == 1 or 2 or 4 or 9:
             self.correct += 1
         else:
             self.incorrect += 1
+
     def check4(self):
         if self.count == 5 or 6:
             self.correct += 1
