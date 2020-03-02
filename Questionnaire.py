@@ -18,7 +18,7 @@ class Ui_Questionnaire(object):
     sum = 0
     questions = ["I know my name and what day of the week it is.",
                  "I know where I am and why I am here.",
-                 "I can remember the incident clearly."
+                 "I can remember the incident clearly.",
                  "I have felt nauseous or vomited since the incident.",
                  "I feel week, drowsy, or tired right now.",
                  "My ears have been ringing since the incident.",
