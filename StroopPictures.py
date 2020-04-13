@@ -13,6 +13,8 @@ from PyQt5.QtWidgets import QWidget, QLabel
 import time
 import datetime
 
+from LineTracing import Ui_LineTracing
+
 
 class Ui_StroopPictures(object):
     count = 0
@@ -149,7 +151,7 @@ class Ui_StroopPictures(object):
     def check2(self):
         self.finish = datetime.datetime.now()
         self.Times[self.count] = self.finish - self.start
-        if self.count == 0 or 7 or 8:
+        if self.count == 0 or self.count == 7 or self.count == 8:
             self.correct += 1
         else:
             self.incorrect += 1
@@ -157,7 +159,7 @@ class Ui_StroopPictures(object):
     def check3(self):
         self.finish = datetime.datetime.now()
         self.Times[self.count] = self.finish - self.start
-        if self.count == 1 or 2 or 4 or 9:
+        if self.count == 1 or self.count == 2 or self.count == 4 or self.count == 9:
             self.correct += 1
         else:
             self.incorrect += 1
@@ -165,7 +167,7 @@ class Ui_StroopPictures(object):
     def check4(self):
         self.finish = datetime.datetime.now()
         self.Times[self.count] = self.finish - self.start
-        if self.count == 5 or 6:
+        if self.count == 5 or self.count == 6:
             self.correct += 1
         else:
             self.incorrect += 1
@@ -174,31 +176,38 @@ class Ui_StroopPictures(object):
         print("correct: " + str(self.correct))
         print("incorrect: " + str(self.incorrect))
         print(self.count)
-        self.count += 1
         print(self.Times)
         self.start = datetime.datetime.now()
-        self.pushButton.setIcon(QtGui.QIcon(self.quad1[self.count]))
-        self.pushButton.setIconSize(QtCore.QSize(326, 196))
-        self.pushButton_2.setIcon(QtGui.QIcon(self.quad2[self.count]))
-        self.pushButton_2.setIconSize(QtCore.QSize(326, 196))
-        self.pushButton_3.setIcon(QtGui.QIcon(self.quad3[self.count]))
-        self.pushButton_3.setIconSize(QtCore.QSize(326, 196))
-        self.pushButton_4.setIcon(QtGui.QIcon(self.quad4[self.count]))
-        self.pushButton_4.setIconSize(QtCore.QSize(326, 196))
-        _translate = QtCore.QCoreApplication.translate
-        self.textBrowser.setHtml(_translate("MainWindow",
-                                            "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-                                            "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-                                            "p, li { white-space: pre-wrap; }\n"
-                                            "</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
-                                            "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:26pt; font-weight:600; color: " + self.targetColor[self.count - 1] + "\">" + self.targetName[self.count - 1] + "</span></p></body></html>"))
+        if self.count < 9:
+            self.count += 1
+            self.pushButton.setIcon(QtGui.QIcon(self.quad1[self.count]))
+            self.pushButton.setIconSize(QtCore.QSize(326, 196))
+            self.pushButton_2.setIcon(QtGui.QIcon(self.quad2[self.count]))
+            self.pushButton_2.setIconSize(QtCore.QSize(326, 196))
+            self.pushButton_3.setIcon(QtGui.QIcon(self.quad3[self.count]))
+            self.pushButton_3.setIconSize(QtCore.QSize(326, 196))
+            self.pushButton_4.setIcon(QtGui.QIcon(self.quad4[self.count]))
+            self.pushButton_4.setIconSize(QtCore.QSize(326, 196))
+            _translate = QtCore.QCoreApplication.translate
+            self.textBrowser.setHtml(_translate("MainWindow",
+                                                "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+                                                "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+                                                "p, li { white-space: pre-wrap; }\n"
+                                                "</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
+                                                "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:26pt; font-weight:600; color: " + self.targetColor[self.count - 1] + "\">" + self.targetName[self.count - 1] + "</span></p></body></html>"))
 
-        #2, 3, 3, 1, 3, 4, 4, 2, 2, 3
+            #2, 3, 3, 1, 3, 4, 4, 2, 2, 3
+        else:
+            self.launchTrace()
 
+    def launchTrace(self):
+        self.window = QtWidgets.QMainWindow()
+        self.ui = Ui_LineTracing()
+        self.ui.setupUi(self.window)
+        self.window.show()
 
 if __name__ == "__main__":
     import sys
-
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_StroopPictures()
