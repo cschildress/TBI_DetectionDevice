@@ -19,24 +19,33 @@ class Ui_LineTracing(object):
         MainWindow.resize(800, 480)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
+        self.verticalLayout = QtWidgets.QVBoxLayout(self.centralwidget)
+        self.verticalLayout.setObjectName("verticalLayout")
+        self.title = QtWidgets.QLabel(self.centralwidget)
+        self.title.setGeometry(QtCore.QRect(13, 10, 55, 41))
+        font = QtGui.QFont()
+        font.setPointSize(20)
+        self.title.setFont(font)
+        self.title.setObjectName("title")
+        self.verticalLayout.addWidget(self.title)
+        self.textBrowser_2 = QtWidgets.QTextBrowser(self.centralwidget)
+        self.textBrowser_2.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        self.textBrowser_2.setObjectName("textBrowser_2")
+        self.verticalLayout.addWidget(self.textBrowser_2)
+        self.examplePicture = QtWidgets.QLabel(self.centralwidget)
+        self.examplePicture.setText("")
+        self.examplePicture.setPixmap(QtGui.QPixmap("/Users/CABOOMDUDE23/Downloads/PythonStuff/exampleTrace.JPG")) #/home/pi/exampleTrace.JPG
+        self.examplePicture.setScaledContents(True)
+        self.examplePicture.setObjectName("examplePicture")
+        self.verticalLayout.addWidget(self.examplePicture)
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton.setGeometry(QtCore.QRect(10, 395, 782, 37))
         font = QtGui.QFont()
         font.setPointSize(18)
         font.setBold(True)
         font.setWeight(75)
         self.pushButton.setFont(font)
         self.pushButton.setObjectName("pushButton")
-        self.title = QtWidgets.QLabel(self.centralwidget)
-        self.title.setGeometry(QtCore.QRect(10, 11, 782, 33))
-        font = QtGui.QFont()
-        font.setPointSize(20)
-        self.title.setFont(font)
-        self.title.setObjectName("title")
-        self.textBrowser_2 = QtWidgets.QTextBrowser(self.centralwidget)
-        self.textBrowser_2.setGeometry(QtCore.QRect(10, 50, 782, 135))
-        self.textBrowser_2.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-        self.textBrowser_2.setObjectName("textBrowser_2")
+        self.verticalLayout.addWidget(self.pushButton)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 21))
@@ -45,7 +54,6 @@ class Ui_LineTracing(object):
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
-
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
@@ -67,7 +75,7 @@ class Ui_LineTracing(object):
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
 "<p align=\"center\" style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:16pt; font-weight:600; text-decoration: underline;\">Instructions</span></p>\n"
-"<p align=\"center\" style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:14pt;\">Trace the line with your finger to the best of your ability.</span><br /></p></body></html>"))
+"<p align=\"center\" style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:14pt;\">Trace the line with your finger to the best of your ability. \nStarting from 1 and moving to 2.\n See the example below, and press start when ready. </span><br /></p></body></html>"))
 
 
 if __name__ == "__main__":
