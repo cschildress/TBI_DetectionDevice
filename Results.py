@@ -8,9 +8,13 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+import Questionnaire, Tracing, StroopPictures
 
 class Ui_MainWindow(object):
+    QuestionnaireSum = Questionnaire.sum
+    StroopCorrect = StroopPictures.correct
+    StroopIncorrect = StroopPictures.incorrect
+    StroopTimes = StroopCorrect.times
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 480)
@@ -68,7 +72,7 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.score1.setText(_translate("MainWindow", "Score 1:"))
+        self.score1.setText(_translate("MainWindow", "Score 1: " ))
         self.score2.setText(_translate("MainWindow", "Score 2:"))
         self.score3.setText(_translate("MainWindow", "Score 3:"))
         self.result1.setText(_translate("MainWindow", "TextLabel"))
