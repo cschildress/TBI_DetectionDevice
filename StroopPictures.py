@@ -10,12 +10,20 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QObject, pyqtSignal, QEvent
 from PyQt5.QtWidgets import QWidget, QLabel
+import time
+import datetime
+
+from LineTracing import Ui_LineTracing
 
 
 class Ui_StroopPictures(object):
     count = 0
     correct = 0
     incorrect = 0
+    start = 0
+    finish = 0
+    diff = 0
+    Times = [None] * 10
     quad1 = [None] * 10
     quad2 = [None] * 10
     quad3 = [None] * 10
@@ -106,6 +114,8 @@ class Ui_StroopPictures(object):
                                             "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:26pt; font-weight:600; color:#4eab5a;\">ORANGE</span></p></body></html>"))
         self.textBrowser.setAutoFillBackground(True)
 
+        self.start = datetime.datetime.now()
+
         self.pushButton.setIcon(QtGui.QIcon(self.quad1[0]))
         self.pushButton.setIconSize(QtCore.QSize(300, 180))
         self.pushButton.clicked.connect(self.check1)
@@ -131,24 +141,32 @@ class Ui_StroopPictures(object):
         self.pushButton_4.setFlat(True)
 
     def check1(self):
+        self.finish = datetime.datetime.now()
+        self.Times[self.count] = self.finish - self.start
         if self.count == 3:
             self.correct += 1
         else:
             self.incorrect += 1
 
     def check2(self):
+        self.finish = datetime.datetime.now()
+        self.Times[self.count] = self.finish - self.start
         if self.count == 0 or self.count == 7 or self.count == 8:
             self.correct += 1
         else:
             self.incorrect += 1
 
     def check3(self):
+        self.finish = datetime.datetime.now()
+        self.Times[self.count] = self.finish - self.start
         if self.count == 1 or self.count == 2 or self.count == 4 or self.count == 9:
             self.correct += 1
         else:
             self.incorrect += 1
 
     def check4(self):
+        self.finish = datetime.datetime.now()
+        self.Times[self.count] = self.finish - self.start
         if self.count == 5 or self.count == 6:
             self.correct += 1
         else:
@@ -157,8 +175,11 @@ class Ui_StroopPictures(object):
     def buildStroop(self):
         print("correct: " + str(self.correct))
         print("incorrect: " + str(self.incorrect))
-        self.count += 1
-        if self.count <= 9:
+        print(self.count)
+        print(self.Times)
+        self.start = datetime.datetime.now()
+        if self.count < 9:
+            self.count += 1
             self.pushButton.setIcon(QtGui.QIcon(self.quad1[self.count]))
             self.pushButton.setIconSize(QtCore.QSize(326, 196))
             self.pushButton_2.setIcon(QtGui.QIcon(self.quad2[self.count]))
@@ -174,12 +195,19 @@ class Ui_StroopPictures(object):
                                                 "p, li { white-space: pre-wrap; }\n"
                                                 "</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
                                                 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:26pt; font-weight:600; color: " + self.targetColor[self.count - 1] + "\">" + self.targetName[self.count - 1] + "</span></p></body></html>"))
+
+            #2, 3, 3, 1, 3, 4, 4, 2, 2, 3
         else:
-            MainWindow.close()
+            self.launchTrace()
+
+    def launchTrace(self):
+        self.window = QtWidgets.QMainWindow()
+        self.ui = Ui_LineTracing()
+        self.ui.setupUi(self.window)
+        self.window.show()
 
 if __name__ == "__main__":
     import sys
-
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_StroopPictures()
