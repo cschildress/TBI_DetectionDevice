@@ -9,13 +9,15 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-from StroopTest import Ui_StroopTest
+import StroopTest
+import Results
 
 
 class Ui_Questionnaire(object):
 
     questionCount = 0
     sum = 0
+    prev = 0
     questions = ["I know my name and what day of the week it is.",
                  "I know where I am and why I am here.",
                  "I can remember the incident clearly.",
@@ -177,20 +179,26 @@ class Ui_Questionnaire(object):
         else:
             if self.radioButton_0.isChecked():
                 self.sum += 0
+                self.prev = 0
             elif self.radioButton_1.isChecked():
                 self.sum += 1
+                self.prev = 1
             elif self.radioButton_2.isChecked():
                 self.sum += 2
+                self.prev = 2
             elif self.radioButton_3.isChecked():
                 self.sum += 3
+                self.prev = 3
             elif self.radioButton_4.isChecked():
                 self.sum += 4
+                self.prev = 4
             self.pushButton.clicked.connect(self.launchStroop)
             self.pushButton.setText("Stroop ->")
 
     def launchStroop(self):
+        Results.Ui_Results.QuestionnaireSum = self.sum - self.prev
         self.window = QtWidgets.QMainWindow()
-        self.ui = Ui_StroopTest()
+        self.ui = StroopTest.Ui_StroopTest()
         self.ui.setupUi(self.window)
         #QuestionnaireWindow.hide(self.window)
         self.window.show()
