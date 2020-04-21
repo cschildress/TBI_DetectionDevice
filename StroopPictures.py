@@ -13,19 +13,23 @@ from PyQt5.QtWidgets import QWidget, QLabel
 import time
 import datetime
 
-from LineTracing import Ui_LineTracing
+import LineTracing
+import Results
 
 
 class Ui_StroopPictures(object):
     count = 0
+    matchcount = 0
+    nonmatchcount = 0
     correct = 0
     incorrect = 0
-    matchingCorrect = 0
-    matchingIncorrect = 0
+    matchcorrect = 0
+    matchincorrect = 0
     start = 0
     finish = 0
     diff = 0
-    Times = [None] * 10
+    Times = [None] * 5
+    MatchTimes = [None] * 5
     quad1 = [None] * 10
     quad2 = [None] * 10
     quad3 = [None] * 10
@@ -144,41 +148,81 @@ class Ui_StroopPictures(object):
 
     def check1(self):
         self.finish = datetime.datetime.now()
-        self.Times[self.count] = self.finish - self.start
+
         if self.count == 3:
             self.correct += 1
+            self.Times[self.nonmatchcount] = self.finish - self.start
+            self.nonmatchcount += 1
+        elif self.count == 2 or self.count == 4 or self.count == 6 or self.count == 7 or self.count == 9:
+            self.matchincorrect += 1
+            self.MatchTimes[self.matchcount] = self.finish - self.start
+            self.matchcount += 1
         else:
             self.incorrect += 1
+            self.Times[self.nonmatchcount] = self.finish - self.start
+            self.nonmatchcount += 1
 
     def check2(self):
         self.finish = datetime.datetime.now()
-        self.Times[self.count] = self.finish - self.start
-        if self.count == 0 or self.count == 7 or self.count == 8:
+
+        if self.count == 0:
             self.correct += 1
+            self.Times[self.nonmatchcount] = self.finish - self.start
+            self.nonmatchcount += 1
+        elif self.count == 7:
+            self.matchcorrect += 1
+            self.MatchTimes[self.matchcount] = self.finish - self.start
+            self.matchcount += 1
+        elif self.count == 2 or self.count == 4 or self.count == 6 or self.count == 9:
+            self.matchincorrect += 1
+            self.MatchTimes[self.matchcount] = self.finish - self.start
+            self.matchcount += 1
         else:
             self.incorrect += 1
+            self.Times[self.nonmatchcount] = self.finish - self.start
+            self.nonmatchcount += 1
 
     def check3(self):
         self.finish = datetime.datetime.now()
-        self.Times[self.count] = self.finish - self.start
-        if self.count == 1 or self.count == 2 or self.count == 4 or self.count == 9:
+
+        if self.count == 1:
             self.correct += 1
+            self.Times[self.nonmatchcount] = self.finish - self.start
+            self.nonmatchcount += 1
+        elif self.count == 2 or self.count == 4 or self.count == 9:
+            self.matchcorrect += 1
+            self.MatchTimes[self.matchcount] = self.finish - self.start
+            self.matchcount += 1
+        elif self.count == 6 or self.count == 7:
+            self.matchincorrect += 1
+            self.MatchTimes[self.matchcount] = self.finish - self.start
+            self.matchcount += 1
         else:
             self.incorrect += 1
+            self.Times[self.nonmatchcount] = self.finish - self.start
+            self.nonmatchcount += 1
 
     def check4(self):
         self.finish = datetime.datetime.now()
-        self.Times[self.count] = self.finish - self.start
-        if self.count == 5 or self.count == 6:
+
+        if self.count == 5:
             self.correct += 1
+            self.Times[self.nonmatchcount] = self.finish - self.start
+            self.nonmatchcount += 1
+        elif self.count == 6:
+            self.matchcorrect += 1
+            self.MatchTimes[self.matchcount] = self.finish - self.start
+            self.matchcount += 1
+        elif self.count == 2 or self.count == 4 or self.count == 7 or self.count == 9:
+            self.matchincorrect += 1
+            self.MatchTimes[self.matchcount] = self.finish - self.start
+            self.matchcount += 1
         else:
             self.incorrect += 1
+            self.Times[self.nonmatchcount] = self.finish - self.start
+            self.nonmatchcount += 1
 
     def buildStroop(self):
-        print("correct: " + str(self.correct))
-        print("incorrect: " + str(self.incorrect))
-        print(self.count)
-        print(self.Times)
         self.start = datetime.datetime.now()
         if self.count < 9:
             self.count += 1
@@ -203,10 +247,29 @@ class Ui_StroopPictures(object):
             self.launchTrace()
 
     def launchTrace(self):
+        Results.Ui_Results.StroopCorrect= self.correct
+        Results.Ui_Results.StroopIncorrect = self.incorrect
+        Results.Ui_Results.StroopMatchCorrect = self.matchcorrect
+        Results.Ui_Results.StroopMatchIncorrectCorrect = self.matchincorrect
+        self.calcAverages()
         self.window = QtWidgets.QMainWindow()
-        self.ui = Ui_LineTracing()
+        self.ui = LineTracing.Ui_LineTracing()
         self.ui.setupUi(self.window)
         self.window.show()
+
+    def calcAverages(self):
+        matchSums = 0.0
+        for x in range(0,5):
+            matchSums += self.MatchTimes[x].seconds + (self.MatchTimes[x].microseconds/1000000)
+        matchSums = matchSums/5
+        matchSums = "%.2f" % matchSums
+        Results.Ui_Results.MatchTimesAvg = matchSums
+        nonMatchSums = 0.0
+        for x in range(0, 5):
+            nonMatchSums += self.Times[x].seconds + (self.Times[x].microseconds / 1000000)
+        nonMatchSums = nonMatchSums/5
+        nonMatchSums = "%.2f" % nonMatchSums
+        Results.Ui_Results.NonMatchTimesAvg = nonMatchSums
 
 if __name__ == "__main__":
     import sys

@@ -9,8 +9,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QObject, pyqtSignal, QEvent
-
-from StroopPictures import Ui_StroopPictures
+import StroopPictures
 
 
 class Ui_StroopTest(object):
@@ -75,7 +74,7 @@ class Ui_StroopTest(object):
 
     def launchStroopPictures(self):
         self.window = QtWidgets.QMainWindow()
-        self.ui = Ui_StroopPictures()
+        self.ui = StroopPictures.Ui_StroopPictures()
         self.ui.setupUi(self.window)
         self.window.show()
 

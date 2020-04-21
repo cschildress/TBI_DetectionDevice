@@ -8,7 +8,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from Questionnaire import Ui_Questionnaire
+import Questionnaire
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -49,7 +49,7 @@ class Ui_MainWindow(object):
 
     def launchQuestionnaire(self):
         self.window = QtWidgets.QMainWindow()
-        self.ui = Ui_Questionnaire()
+        self.ui = Questionnaire.Ui_Questionnaire()
         self.ui.setupUi(self.window)
         MainWindow.hide()
         self.window.show()
