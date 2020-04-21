@@ -20,7 +20,7 @@ class Ui_Tracing(object):
         self.button.setMouseTracking(True)
         self.button.setAutoFillBackground(False)
         self.button.setObjectName("start")
-        self.button.setIcon(QtGui.QIcon("/Users/CABOOMDUDE23/Downloads/PythonStuff/tracing1.png"))
+        self.button.setIcon(QtGui.QIcon("/home/pi/pics/tracing1.png"))
         self.button.setIconSize(QtCore.QSize(800, 480))
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
@@ -44,11 +44,11 @@ class Ui_Tracing(object):
     def nextWindow(self):
         self.count += 1
         if self.count == 1:
-            self.button.setIcon(QtGui.QIcon("/Users/CABOOMDUDE23/Downloads/PythonStuff/tracing2.png"))
+            self.button.setIcon(QtGui.QIcon("/home/pi/pics/tracing2.png"))
             self.line1 = 21485
             Results.Ui_Results.line1 = self.line1
         if self.count == 2:
-            self.button.setIcon(QtGui.QIcon("/Users/CABOOMDUDE23/Downloads/PythonStuff/tracing3.png"))
+            self.button.setIcon(QtGui.QIcon("/home/pi/pics/tracing3.png"))
             self.line2 = 165834
             Results.Ui_Results.line2 = self.line2
         if self.count > 2:

@@ -34,7 +34,7 @@ class Ui_LineTracing(object):
         self.verticalLayout.addWidget(self.textBrowser_2)
         self.examplePicture = QtWidgets.QLabel(self.centralwidget)
         self.examplePicture.setText("")
-        self.examplePicture.setPixmap(QtGui.QPixmap("/Users/CABOOMDUDE23/Downloads/PythonStuff/exampleTrace.JPG")) #/home/pi/exampleTrace.JPG
+        self.examplePicture.setPixmap(QtGui.QPixmap("/home/pi/pics/exampleTrace.JPG")) #/home/pi/exampleTrace.JPG
         self.examplePicture.setScaledContents(True)
         self.examplePicture.setObjectName("examplePicture")
         self.verticalLayout.addWidget(self.examplePicture)

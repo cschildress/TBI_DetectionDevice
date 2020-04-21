@@ -15,6 +15,7 @@ class Ui_Results(object):
     lowtest = 0
     midtest = 0
     hightest = 0
+    finalresult = 0
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 480)
@@ -63,7 +64,7 @@ class Ui_Results(object):
         self.label_2.setAlignment(QtCore.Qt.AlignHCenter | QtCore.Qt.AlignBottom)
         self.verticalLayout.addWidget(self.label_2)
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton.setGeometry(QtCore.QRect(10, 420, 779, 41))
+        self.pushButton.setGeometry(QtCore.QRect(10, 400, 779, 41))
         font = QtGui.QFont()
         font.setPointSize(22)
         self.pushButton.setFont(font)
@@ -102,13 +103,15 @@ class Ui_Results(object):
                                             + str(self.QuestionnaireSum) + " out of 40."))
             if self.QuestionnaireSum < 5:
                 self.lowtest += 1
-                self.label_2.setPixmap(QtGui.QPixmap("/Users/CABOOMDUDE23/Downloads/PythonStuff/questionnaireResults1.JPG"))
+                self.label_2.setPixmap(QtGui.QPixmap("/home/pi/pics/questionnaireResults1.JPG"))
             if self.QuestionnaireSum > 5 and self.QuestionnaireSum < 15:
                 self.midtest += 1
-                self.label_2.setPixmap(QtGui.QPixmap("/Users/CABOOMDUDE23/Downloads/PythonStuff/questionnaireResults2.JPG"))
+                self.finalresult += 2
+                self.label_2.setPixmap(QtGui.QPixmap("/home/pi/pics/questionnaireResults2.JPG"))
             if self.QuestionnaireSum > 15:
                 self.hightest += 1
-                self.label_2.setPixmap(QtGui.QPixmap("/Users/CABOOMDUDE23/Downloads/PythonStuff/questionnaireResults3.JPG"))
+                self.finalresult += 4
+                self.label_2.setPixmap(QtGui.QPixmap("/home/pi/pics/questionnaireResults3.JPG"))
         if self.count == 1:
             self.pushButton.setText(_translate("MainWindow", "Line Tracing Results ->"))
             font = QtGui.QFont()
@@ -123,7 +126,7 @@ class Ui_Results(object):
                                         " time of " + str(self.NonMatchTimesAvg) + " seconds."))
             self.label_2.setScaledContents(True)
             self.lowtest += 1
-            self.label_2.setPixmap(QtGui.QPixmap("/Users/CABOOMDUDE23/Downloads/PythonStuff/stroopResults.JPG"))
+            self.label_2.setPixmap(QtGui.QPixmap("/home/pi/pics/stroopResults.JPG"))
         if self.count == 2:
             self.pushButton.setText(_translate("MainWindow", "Final Results"))
             font = QtGui.QFont()
@@ -137,13 +140,15 @@ class Ui_Results(object):
             self.label_2.setScaledContents(False)
             if avg < 30000:
                 self.lowtest += 1
-                self.label_2.setPixmap(QtGui.QPixmap("/Users/CABOOMDUDE23/Downloads/PythonStuff/tracingResult1.JPG"))
+                self.label_2.setPixmap(QtGui.QPixmap("/home/pi/pics/tracingResult1.JPG"))
             if avg > 30000 and avg < 60000:
                 self.midtest += 1
-                self.label_2.setPixmap(QtGui.QPixmap("/Users/CABOOMDUDE23/Downloads/PythonStuff/tracingResult2.JPG"))
+                self.finalresult += 2
+                self.label_2.setPixmap(QtGui.QPixmap("/home/pi/pics/tracingResult2.JPG"))
             if avg > 60000:
                 self.hightest += 1
-                self.label_2.setPixmap(QtGui.QPixmap("/Users/CABOOMDUDE23/Downloads/PythonStuff/tracingResult3.JPG"))
+                self.finalresult += 4
+                self.label_2.setPixmap(QtGui.QPixmap("/home/pi/pics/tracingResult3.JPG"))
         if self.count == 3:
             self.pushButton.setText(_translate("MainWindow", "End Program"))
             self.testLabel.setText(_translate("MainWindow", "Final Results:"))
@@ -151,9 +156,17 @@ class Ui_Results(object):
             font = QtGui.QFont()
             font.setPointSize(25)
             self.label.setFont(font)
-            self.label.setText(_translate("MainWindow", "\nNumber of Low Risk Results: " + str(self.lowtest) +
+            if self.finalresult < 4:
+                self.label.setText(_translate("MainWindow", "\nNumber of Low Risk Results: " + str(self.lowtest) +
                                             "\n\nNumber of Medium Risk Results: " + str(self.midtest) +
                                             "\n\nNumber of High Risk Results: " + str(self.hightest)))
+            else:
+                self.label.setText(_translate("MainWindow", "\nNumber of Low Risk Results: " + str(self.lowtest) +
+                                              "\n\nNumber of Medium Risk Results: " + str(self.midtest) +
+                                              "\n\nNumber of High Risk Results: " + str(self.hightest) +
+                                              "\n\nYour tests have concerning results,\nyou should visit a doctor"
+                                              "for the possibility of a mild traumatic brain injury"))
+
         if self.count == 4:
             exit()
         self.count += 1
