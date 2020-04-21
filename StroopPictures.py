@@ -20,6 +20,8 @@ class Ui_StroopPictures(object):
     count = 0
     correct = 0
     incorrect = 0
+    matchingCorrect = 0
+    matchingIncorrect = 0
     start = 0
     finish = 0
     diff = 0
