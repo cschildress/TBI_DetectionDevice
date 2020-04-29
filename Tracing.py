@@ -1,6 +1,15 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtCore import Qt
 
 import Results
+
+
+class DragMode(object):
+    pass
+
+
+class WindowPos(object):
+    pass
 
 
 class Ui_Tracing(object):
@@ -8,6 +17,10 @@ class Ui_Tracing(object):
     line1 = 0
     line2 = 0
     line3 = 0
+    expectedline = 0
+    linedrawn = 0
+    startingpoint = 0
+    endingpoint = 0
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 480)
@@ -34,27 +47,57 @@ class Ui_Tracing(object):
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
         #self.startButton.clicked.connect(self.mouseStart())
-        self.button.released.connect(self.nextWindow)
+        self.button.released.connect(self.mousePressEvent())
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.button.setText(_translate("MainWindow", ""))
 
+    def mousePressEvent(self, event: QtGui.QMouseEvent):
+        if not event.buttons() & Qt.LeftButton:
+            return
+        # drag detection
+        self.drag_mode = self.latent_drag_mode
+        if self.drag_mode == DragMode.CLIP_BOX:
+            self.clip_box.press_state = self.clip_box.state
+        wp = WindowPos.from_QPoint(event.pos())
+        self.previous_mouse = wp
+        # click detection
+        self.maybe_clicking = True
+        self.mouse_press_pos = QtCore.QPoint(event.pos().x(), event.pos().y())
+
     def nextWindow(self):
         self.count += 1
         if self.count == 1:
             self.button.setIcon(QtGui.QIcon("/home/pi/pics/tracing2.png"))
-            self.line1 = 21485
+            for x in range(0, 800):
+                self.calcpixelDiff()
             Results.Ui_Results.line1 = self.line1
         if self.count == 2:
             self.button.setIcon(QtGui.QIcon("/home/pi/pics/tracing3.png"))
-            self.line2 = 165834
+            for x in range(0, 800):
+                self.calcpixelDiff()
             Results.Ui_Results.line2 = self.line2
         if self.count > 2:
-            self.line3 = 84340
+            for x in range(0, 800):
+                self.calcpixelDiff()
             Results.Ui_Results.line3 = self.line3
             self.launchResults()
+
+    def calcpixelDiff(self):
+        slope = (self.startingpoint.getY()-self.endingpoint.getY())/(self.startingpoint.getX()-self.endingpoint.getX())
+        intercept = slope * self.startingpoint.getX() - self.startingpoint.getY()
+        if self.count == 1:
+            expectedY = self.mouse_press_pos.x()*slope+intercept
+            self.line1 += self.mouse_press_pos.y() - expectedY
+        if self.count == 2:
+            expectedY = self.mouse_press_pos.x()*slope+intercept
+            self.line2 += self.mouse_press_pos.y() - expectedY
+        if self.count == 3:
+            expectedY = self.mouse_press_pos.x()*slope+intercept
+            self.line3 += self.mouse_press_pos.y() - expectedY
+
 
     def launchResults(self):
         self.window = QtWidgets.QMainWindow()

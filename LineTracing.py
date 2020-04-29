@@ -9,9 +9,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-#from Tracing import Ui_Tracing
 import Tracing
-
 
 class Ui_LineTracing(object):
     def setupUi(self, MainWindow):
@@ -71,11 +69,14 @@ class Ui_LineTracing(object):
         self.pushButton.setText(_translate("MainWindow", "Start"))
         self.title.setText(_translate("MainWindow", "Line Tracing Test"))
         self.textBrowser_2.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
-"<p align=\"center\" style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:16pt; font-weight:600; text-decoration: underline;\">Instructions</span></p>\n"
-"<p align=\"center\" style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:14pt;\">Draw a line with your finger from point A to point B to the best of your ability. \nStarting from 1 and moving to 2.\n See the example below, and press start when ready. </span><br /></p></body></html>"))
+        "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+        "p, li { white-space: pre-wrap; }\n"
+        "</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
+        "<p align=\"center\" style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+        "\"><span style=\" font-size:16pt; font-weight:600; text-decoration: underline;\">Instructions</span></p>\n"
+        "<p align=\"center\" style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+        "\"><span style=\" font-size:14pt;\">Draw a line with your finger from point A to point B to the best of your ability. "
+        "\nStarting from 1 and moving to 2.\n See the example below, and press start when ready. </span><br /></p></body></html>"))
 
 
 if __name__ == "__main__":
